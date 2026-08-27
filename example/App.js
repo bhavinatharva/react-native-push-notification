@@ -35,11 +35,6 @@ export default class App extends Component {
           Example app react-native-push-notification
         </Text>
         <View style={styles.spacer}></View>
-        <TextInput
-          style={styles.textField}
-          value={this.state.registerToken}
-          placeholder="Register token"
-        />
         <View style={styles.spacer}></View>
 
         <TouchableOpacity
@@ -136,7 +131,7 @@ export default class App extends Component {
 
         <View style={styles.spacer}></View>
 
-        {this.state.fcmRegistered && <Text>FCM Configured !</Text>}
+
 
         <View style={styles.spacer}></View>
       </View>
@@ -144,7 +139,7 @@ export default class App extends Component {
   }
 
   onRegister(token) {
-    this.setState({registerToken: token.token, fcmRegistered: true});
+    console.log("Registered !", token);
   }
 
   onNotif(notif) {
