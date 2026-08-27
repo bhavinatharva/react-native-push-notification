@@ -4,7 +4,7 @@
 
 'use strict';
 
-import { AppState, Platform } from 'react-native';
+import { AppState, Platform, PermissionsAndroid } from 'react-native';
 import { component } from './component';
 
 const Notifications = {
@@ -453,16 +453,25 @@ Notifications._requestPermissions = function() {
               .catch(this._onPermissionResult.bind(this));
     }
   } else if (Platform.OS === 'android') {
-    return this.callNative( 'requestPermissions', []);
+    return this.requestPermissions();
   }
 };
 
 // Stock requestPermissions function
-Notifications.requestPermissions = function() {
+Notifications.requestPermissions = async function() {
   if ( Platform.OS === 'ios' ) {
     return this.callNative( 'requestPermissions', [ this.permissions ]);
   } else if (Platform.OS === 'android') {
-    return this.callNative( 'requestPermissions', []);
+    if (Platform.Version >= 33) {
+      try {
+        const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
+        return granted === PermissionsAndroid.RESULTS.GRANTED;
+      } catch (err) {
+        console.warn(err);
+        return false;
+      }
+    }
+    return true;
   }
 };
 
