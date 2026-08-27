@@ -171,6 +171,7 @@ const styles = StyleSheet.create({
     width: '70%',
     backgroundColor: '#DDDDDD',
     borderRadius: 5,
+    opacity: 1,
   },
   textField: {
     borderWidth: 1,
