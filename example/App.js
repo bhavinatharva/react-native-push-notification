@@ -12,6 +12,7 @@ import {
   StyleSheet,
   Text,
   View,
+  ScrollView,
   TouchableOpacity,
   Alert,
 } from 'react-native';
@@ -30,7 +31,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.title}>
           Example app react-native-push-notification
         </Text>
@@ -134,7 +135,7 @@ export default class App extends Component {
 
 
         <View style={styles.spacer}></View>
-      </View>
+      </ScrollView>
     );
   }
 
@@ -153,10 +154,11 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    paddingVertical: 40,
   },
   welcome: {
     fontSize: 20,
